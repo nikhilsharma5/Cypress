@@ -6,6 +6,18 @@ describe("template spec", () => {
     cy.contains("Nikhil Sharma").click();
   });
 
+  it("iframe", () => {
+    cy.visit("https://sharma-nikhil.com");
+    cy.get("#navbar-resume-cl").click();
+    cy.get("iframe")
+      .first()
+      .its("0.contentDocument")
+      .then((doc) => {
+        cy.log(doc.documentElement.innerHTML);
+      });
+    // .contains("https://sharma-nikhil.com");
+  });
+
   it("api - with expect-eq", () => {
     cy.request({
       url: "https://jsonplaceholder.typicode.com/comments?postId=1",
